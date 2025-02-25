@@ -1,0 +1,67 @@
+@font-face {
+    font-family: kanit;
+    src: url("../font/Kanit/Kanit-Regular.ttf");
+}
+*{
+    font-family: kanit;
+}
+.list-group {
+    height: 300px; /* กำหนดความสูงคงที่ */
+    overflow-y: auto; /* ถ้ามีรายการเยอะ ให้มี scrollbar */
+}
+.picker__frame {
+    max-width: 300px; /* จำกัดขนาดของป๊อปอัพ */
+  }
+.v-center {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 300px; /* ต้องกำหนดให้สูงเท่ากับ .list-group */
+}
+
+.datepicker {
+    font-size: 14px; /* ลดขนาดฟอนต์ */
+    padding: 5px 10px; /* ลด Padding */
+    width: 150px; /* ลดความกว้างของช่อง */
+    height: 30px; /* ลดความสูง */
+    border-radius: 5px; /* มุมมน */
+    border: 1px solid #ccc;
+  }
+
+  /* ปรับขนาด Popup */
+  .picker {
+    font-size: 12px; /* ลดขนาดฟอนต์ */
+    width: 240px; /* ความกว้างของป็อปอัพ */
+  }
+
+  /* ปรับขนาด Dropdown */
+  .picker__select--month,
+  .picker__select--year {
+    font-size: 12px; /* ขนาดฟอนต์ */
+    padding: 2rem 5px; /* ลด Padding */
+    height: 80px; /* ลดความสูง */
+    width: 100px; /* ลดความกว้าง */
+    border: 1px solid #ccc; /* กำหนดขอบ */
+    border-radius: 5px; /* ทำให้มุมมน */
+  }
+
+  /* ปรับขนาดปุ่ม Today, Clear, Close */
+  .picker__button--today,
+  .picker__button--clear,
+  .picker__button--close {
+    font-size: 12px; /* ลดขนาดฟอนต์ของปุ่ม */
+    padding: 5px 10px; /* ลดขนาดปุ่ม */
+  }
+
+  /* ปรับขนาดของวันที่ */
+  .picker__day {
+    width: 30px; /* ขนาดช่องของวัน */
+    height: 30px;
+    font-size: 12px;
+    line-height: 30px; /* ให้ข้อความอยู่ตรงกลาง */
+  }
+  .picker__select--month option,
+  .picker__select--year option {
+    font-size: 12px; /* ลดขนาดฟอนต์ในตัวเลือก */
+  }
+
