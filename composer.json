@@ -1,0 +1,6 @@
+{
+    "name": "thna1/uniform_update",
+    "require": {
+        "phpoffice/phpspreadsheet": "^4.0"
+    }
+}
