@@ -1,8 +1,8 @@
 <?php
 
     function db() {
-       $conn = new mysqli("localhost","sbtcacth_uniform","VSFUBnKYbpCUYWg4rkS2","sbtcacth_uniform");
-        // $conn = new mysqli("localhost","root","","db_uniformfinal");
+    //    $conn = new mysqli("localhost","sbtcacth_uniform","VSFUBnKYbpCUYWg4rkS2","sbtcacth_uniform");
+        $conn = new mysqli("localhost","root","","db_uniformfinal");
         ini_set('display_errors', 0);
         $conn->set_charset("utf8");
         return $conn;
@@ -76,5 +76,17 @@
             # code...
             return $fet->department;
         }
+    }
+
+    function getProject($id) {
+        if($id == 1) {
+            return "สิทธิ์เรียนฟรี 15 ปี (950 บาท)";
+        }else{
+            return "ไม่ได้รับสิทธิ์เรียนฟรี";
+        }
+    }
+
+    function getSex($sex) {
+        return $sex == 1 ? "ชาย" : ($sex == 2  ? "หญิง" : "ไม่มีข้อมูลเพศ");
     }
 ?>

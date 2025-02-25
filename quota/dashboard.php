@@ -67,7 +67,12 @@
                                 </div>
                                 <div class="col-md-8">
                                     <div class="card-body">
-                                        <h5 class="card-title"><?= $fet->pro_name; ?></h5>
+                                       <div class="d-flex justify-content-between">
+                                            <h5 class="card-title"><?= $fet->pro_name; ?></h5>
+                                            <button class="btn btn-sm btn-primary">
+                                                <i class="bi bi-eye-fill"></i>
+                                            </button>
+                                       </div>
                                         <p class="text-muted mb-1">ราคา: <strong><?= $fet->pro_price; ?> บาท</strong></p>
                                         <?php 
                                             $sql_cartQuota = db()->query("SELECT * FROM tb_cart_quota WHERE cq_product = '".$fet->pro_id."' AND cq_user = '".$_SESSION['user_id']."' AND order_id = 0 ");

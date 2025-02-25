@@ -79,11 +79,14 @@
                 </select>
             </div>
             <div class="col-md-3">
-                <label for="project" class="form-label">โครงการ</label>
+                <label for="project" class="form-label">ประเภท</label>
                 <select class="form-select" id="quota" name="quota">
                     <option value="">ทั้งหมด</option>
-                    <option value="0">ปกติ</option>
-                    <option value="1">โควต้าเรียนฟรี</option>
+                    <?php 
+                        for($i=0;$i<=1;$i++) {
+                    ?>
+                    <option value="<?= $i; ?>"><?= getProject($i); ?></option>
+                    <?php } ?> 
                 </select>
             </div>
         </div>
@@ -147,7 +150,7 @@
                                             <p class="card-text" style="font-family: 'Mitr', sans-serif; width: 50%; padding-right: 10px;">
                                                 <i class="bi bi-building" style="color: rgb(95, 122, 171);"></i> แผนการศึกษา: <?= $department_name; ?>
                                                 <br>
-                                                <i class="bi bi-clipboard-check" style="color: rgb(95, 122, 171);"></i> โครงการ: <?= $quota == "1" ? "เรียนฟรี" : ($quota == "0" ? "ปกติ" : "ทั้งหมด") ?>
+                                                <i class="bi bi-clipboard-check" style="color: rgb(95, 122, 171);"></i> ประเภท: <?= $quota != '' ? getProject($quota) : "ทั้งหมด";  ?>
                                             </p>
                                             <!-- ข้อมูล 3 -->
                                             <p class="card-text" style="font-family: 'Mitr', sans-serif; width: 100%;">

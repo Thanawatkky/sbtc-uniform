@@ -26,7 +26,7 @@
     <tr>
             <td><?= $i; ?></td>
             <td><?= $fet->grade; ?></td>
-            <td><?= $fet->quota == 1 ? "โควต้าเรียนฟรี" : "ปกติ"; ?></td>
+            <td><?= getProject($fet->quota); ?></td>
             <td>
           
                     <a href="#" class="text-warning mx-2" data-id="<?= $fet->g_id; ?>" data-grade="<?= $fet->grade; ?>" data-quota="<?= $fet->quota; ?>" data-bs-toggle="modal" data-bs-target="#modalUpdateGrade" id="editGrade"><i class="bi bi-pencil-square"></i></a>
@@ -84,11 +84,11 @@
                         />
                     </div>
                     <div class="mb-3">
-                        <label for="grade" class="form-label">โครงการ</label>
+                        <label for="grade" class="form-label">ประเภท</label>
                         <select name="quota" id="quota" class="form-select" required>
-                            <option value="" hidden selected disabled>เลือกโครงการ</option>
-                            <option value="1">โควต้าเรียนฟรี</option>
-                            <option value="0">ปกติ</option>
+                            <option value="" hidden selected disabled>เลือกประเภท</option>
+                            <option value="1">สิทธิ์เรียนฟรี 15 ปี (950 บาท)</option>
+                            <option value="0">ไม่ได้รับสิทธิ์เรียนฟรี</option>
                         </select>
                     </div>
                     
