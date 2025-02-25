@@ -86,6 +86,12 @@
         <i class="fas fa-fw fa-table"></i>
         <span>รอบการสั่งซื้อ</span></a>
 </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="index.php?p=create_user_department">
+        <i class="fas fa-fw fa-table"></i>
+        <span>สร้างผู้ใช้งาน สำหรับเเผนก</span></a>
+</li>
 <!-- Divider -->
 <li class="nav-item">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseReport"
