@@ -88,18 +88,20 @@
             </div>
             <div class="mb-3">
                 <div class="form-floating">
-                    <input type="tel" class="form-control" id="tel" name="tel" placeholder="Phone Number">
-                    <label for="tel" style="font-family: 'Mitr', sans-serif;"><i class="bi bi-telephone"></i> เบอร์โทรศัพท์</label>
+                    <input type="tel" class="form-control" id="tel" name="tel" placeholder="Phone Number" maxlength="10" required>
+                    <label for="tel"><i class="bi bi-telephone"></i> เบอร์โทรศัพท์</label>
                 </div>
-                <span id="tel-error" class="error" for="tel"></span>
+                <span id="tel-error" class="error"></span>
             </div>
+
             <div class="mb-3">
                 <div class="form-floating">
-                    <input type="number" class="form-control" id="citizen_id" name="citizen_id" placeholder="Phone Number">
-                    <label for="citizen_id" style="font-family: 'Mitr', sans-serif;"><i class="bi bi-person-vcard"></i> เลขบัตรประจำตัวประชาชน</label>
+                    <input type="text" class="form-control" id="citizen_id" name="citizen_id" placeholder="Citizen ID" maxlength="13" required pattern="\d{13}">
+                    <label for="citizen_id"><i class="bi bi-person-vcard"></i> เลขบัตรประจำตัวประชาชน</label>
                 </div>
-                <span id="citizen_id-error" class="error" for="citizen_id"></span>
+                <span id="citizen_id-error" class="error"></span>
             </div>
+
             <div class="form-floating">
                         <select class="form-select" id="grade" name="grade" style="font-family: 'Mitr', sans-serif;">
                             <option style="font-family: 'Mitr', sans-serif;" value="" selected hidden disabled>เลือกระดับชั้น</option>
@@ -157,92 +159,138 @@
     <script src="js/scripts.js"></script>
 <script>
  
-    $(document).ready(function () {
-        $("#grade").change(()=>{
-
-            $.ajax({
-                url: "api/ac_search.php?ac=department&g_id="+$("#grade").val(),
-                method: "get",
-                success:function(data){
-                    $("#department").html(data);
-                },error: function(err) {
-                    console.log(err);
-                    
-                }
-            })
-        })
-        $("#department").change(()=>{
-
-            $.ajax({
-                url: "api/ac_search.php?ac=room&dep_id="+$("#department").val(),
-                method: "get",
-                success:function(data){
-                    $("#room").html(data);
-                },error: function(err) {
-                    console.log(err);
-                    
-                }
-            })
-        })
-        $("#registrationForm").validate({
-    rules: {
-        fullname: "required",
-        tel: {
-            required: true,
-            digits: true
-        },
-        department: "required",
-        grade: "required",
-        room: "required",
-        citizen_id: "required"
-    },
-    messages: {
-        fullname: "กรุณากรอกชื่อ-นามสกุลของคุณ",
-        citizen_id: "กรุณากรอกเลขบัตรประจำตัวประชาชนของคุณ",
-        tel: "กรุณากรอกเบอร์โทรศัพท์ของคุณ",
-        grade: "กรุณาเลือกระดับชั้น",
-        department: "กรุณาเลือกแผนกวิชาของคุณ",
-        room: "กรุณาเลือกห้องเรียนของคุณ"
-    },
-    errorPlacement: function (error, element) {
-        error.insertAfter(element.closest('.form-floating')); // แสดงข้อความ error ใต้ input
-    },
-    submitHandler: function (form) {
-        // เมื่อฟอร์ม valid และ ready ส่งผ่าน AJAX
-        let quota = $("#grade option:selected").data("quota");
-        let url = $(form).attr("action");
-        let method = $(form).attr("method");
-        let data = new FormData(form);
-        data.append("quota", quota);
-
+ $(document).ready(function () {
+    $("#grade").change(() => {
         $.ajax({
-            url: url,
-            data: data,
-            method: method,
-            dataType: "json",
-            processData: false,
-            contentType: false,
-            success: function (response) {
-                if (response.status) {
-                    window.location.replace("login.php");
-                } else {
-                    alertMsg(response.msg, response.type);
-                    setTimeout(() => {
-                        window.location.reload(true);
-                    }, 2000);
-                }
+            url: "api/ac_search.php?ac=department&g_id=" + $("#grade").val(),
+            method: "get",
+            success: function (data) {
+                $("#department").html(data);
             },
             error: function (err) {
                 console.log(err);
             }
         });
+    });
 
-        return false; // ป้องกันการ submit แบบปกติ
-    }
+    $("#department").change(() => {
+        $.ajax({
+            url: "api/ac_search.php?ac=room&dep_id=" + $("#department").val(),
+            method: "get",
+            success: function (data) {
+                $("#room").html(data);
+            },
+            error: function (err) {
+                console.log(err);
+            }
+        });
+    });
+
+    $("#registrationForm").validate({
+        rules: {
+            fullname: "required",
+            tel: {
+                required: true,
+                digits: true,
+                minlength: 10,
+                maxlength: 10
+            },
+            citizen_id: {
+                required: true,
+                digits: true,
+                minlength: 13,
+                maxlength: 13
+            },
+            department: "required",
+            grade: "required",
+            room: "required"
+        },
+        messages: {
+            fullname: "กรุณากรอกชื่อ-นามสกุลของคุณ",
+            tel: {
+                required: "กรุณากรอกเบอร์โทรศัพท์ของคุณ",
+                minlength: "หมายเลขเบอร์โทรศัพท์ต้องมี 10 หลัก",
+                maxlength: "หมายเลขเบอร์โทรศัพท์ต้องมี 10 หลัก"
+            },
+            citizen_id: {
+                required: "กรุณากรอกเลขบัตรประจำตัวประชาชนของคุณ",
+                minlength: "กรุณากรอกเลขบัตรประชาชนให้ครบ 13 หลัก",
+                maxlength: "กรุณากรอกเลขบัตรประชาชนให้ครบ 13 หลัก"
+            },
+            grade: "กรุณาเลือกระดับชั้น",
+            department: "กรุณาเลือกแผนกวิชาของคุณ",
+            room: "กรุณาเลือกห้องเรียนของคุณ"
+        },
+        errorPlacement: function (error, element) {
+            error.insertAfter(element.closest('.form-floating'));
+        },
+        submitHandler: function (form) {
+            let tel = $("#tel").val();
+            let citizenId = $("#citizen_id").val();
+
+            if (tel.length !== 10) {
+                Swal.fire({
+                    icon: "error",
+                    title: "ข้อผิดพลาด",
+                    text: "หมายเลขเบอร์โทรศัพท์ต้องมี 10 หลัก",
+                });
+                return false;
+            }
+
+            if (citizenId.length !== 13) {
+                Swal.fire({
+                    icon: "error",
+                    title: "ข้อผิดพลาด",
+                    text: "กรุณากรอกเลขบัตรประชาชนให้ครบ 13 หลัก",
+                });
+                return false;
+            }
+
+            let quota = $("#grade option:selected").data("quota");
+            let url = $(form).attr("action");
+            let method = $(form).attr("method");
+            let data = new FormData(form);
+            data.append("quota", quota);
+
+            $.ajax({
+                url: url,
+                data: data,
+                method: method,
+                dataType: "json",
+                processData: false,
+                contentType: false,
+                success: function (response) {
+                    if (response.status) {
+                        Swal.fire({
+                            icon: "success",
+                            title: "สมัครสมาชิกสำเร็จ!",
+                            text: "กรุณาเข้าสู่ระบบเพื่อใช้งาน",
+                            confirmButtonText: "ตกลง"
+                        }).then(() => {
+                            window.location.replace("login.php");
+                        });
+                    } else {
+                        Swal.fire({
+                            icon: response.type,
+                            title: "เกิดข้อผิดพลาด",
+                            text: response.msg
+                        });
+                        setTimeout(() => {
+                            window.location.reload(true);
+                        }, 2000);
+                    }
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            });
+
+            return false;
+        }
+    });
 });
 
-    });
-   
+
     
 </script>
 

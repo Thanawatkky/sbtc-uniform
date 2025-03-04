@@ -1,5 +1,5 @@
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <h1 class="h3 mb-0 text-gray-800">จัดการเครื่องแบบสำหรับโควต้าเรียนฟรี</h1>
+    <h1 class="h3 mb-0 text-gray-800">จัดการเครื่องแบบสิทธิ์เรียนฟรี 15 ปี</h1>
 </div>
 <div class="w-full ">
     <h5>เครื่องแบบ</h5>
@@ -66,7 +66,7 @@
         foreach ($sex as $key => $value) {
      ?>
     <div class="col-md-6">
-      <h5>เครื่องแบบโควต้า นักเรียน<?= $value; ?></h5>
+      <h5>เครื่องแบบสิทธิ์เรียนฟรี 15 ปี<?= $value; ?> จำนวน 950</h5>
       <ul class="list-group" id="listB<?= $key; ?>">
         <?php 
                $sql_get = db()->query("SELECT tb_uquota.*, tb_product.* FROM tb_uquota LEFT JOIN tb_product ON tb_uquota.pro_id = tb_product.pro_id WHERE tb_uquota.sex = '".$key."' OR tb_uquota.sex = 3");

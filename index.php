@@ -489,6 +489,25 @@
                     }
                 })
             })
+            $(document).on("click","#btn-editOrder",function() {
+                let id = $(this).data("id");
+                $.ajax({
+                    url: 'api/ac_order.php?ac=confirmReq&order_id='+id,
+                    method: 'get',
+                    dataType: 'json',
+                    success: function(data) {
+                        if(data.status) {
+                                window.location.replace("index.php?p=update_order&order_id="+id);
+                        }else{
+                            console.log(data);
+                            
+                        }
+                    },error:function(err) {
+                        console.log(err);
+                        
+                    }
+                })
+            })
         </script>
     </body>
 </html>

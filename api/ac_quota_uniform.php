@@ -93,8 +93,44 @@
                                 echo db()->error;
                             }
                         }
+                    }else{
+                        $sql_delete = db()->query("DELETE FROM tb_cart_quota WHERE cq_user = '".$_SESSION['user_id']."' AND order_id <= 0 ");
+                        $sql = db()->query("SELECT * FROM tb_uquota WHERE sex='".$_REQUEST['sex']."' ");
+                        while($fet = $sql->fetch_object()) {
+                            $data = [
+                                "cq_product" => $fet->pro_id,
+                                "cq_user" => $_SESSION['user_id'],
+                                "cq_qty" => $fet->u_qty
+                            ];
+                            if(insert("tb_cart_quota", $data)) {
+                                $_SESSION['sex'] = $_REQUEST['sex'];
+                                echo jsonMsg(true, "เพิ่มข้อมูลสำเร็จ","success");
+                            }else{
+                                echo db()->error;
+                            }
+                        }
                     }
                         break;
+
+                        case 'changeSex':
+                          unset($_SESSION['sex']);
+
+                          $sql_delete = db()->query("DELETE FROM tb_cart_quota WHERE cq_user = '".$_SESSION['user_id']."' AND order_id <= 0 ");
+                          $sql = db()->query("SELECT * FROM tb_uquota WHERE sex='".$_REQUEST['sex']."' ");
+                          while($fet = $sql->fetch_object()) {
+                              $data = [
+                                  "cq_product" => $fet->pro_id,
+                                  "cq_user" => $_SESSION['user_id'],
+                                  "cq_qty" => $fet->u_qty
+                              ];
+                              if(insert("tb_cart_quota", $data)) {
+                                  $_SESSION['sex'] = $_REQUEST['sex'];
+                                  echo jsonMsg(true, "เพิ่มข้อมูลสำเร็จ","success");
+                              }else{
+                                  echo db()->error;
+                              }
+                          }
+                            break;
         }
     }
 ?>

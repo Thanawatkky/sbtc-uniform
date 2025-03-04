@@ -11,25 +11,36 @@
         <tr>
             <th>#</th>
             <th>ชื่อ-นามสกุล</th>
+            <th>Username</th>
             <th>รหัสผ่าน</th>
             <th>เเผนกวิชา</th>
             <th >Action</th>
         </tr>
     </thead>
     <tbody>
-      
+      <?php 
+        $sql = db()->query("SELECT * FROM tb_user WHERE user_role = 3");
+        $i=0;
+        while ($fet = $sql->fetch_object()) {
+            $i++;
+      ?>
     <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td><?= $i; ?></td>
+            <td><?=  $fet->fullname; ?></td>
+            <td><?=  $fet->username; ?></td>
+            <td><?= $fet->password; ?></td>
+            <td><?= getDepartment($fet->dep_id); ?></td>
             <td>
-                    <a href="#" class="text-warning mx-2" data-id="<?= $fet->g_id; ?>" data-grade="<?= $fet->grade; ?>" data-quota="<?= $fet->quota; ?>" data-bs-toggle="modal" data-bs-target="#modalUpdateGrade" id="editGrade"><i class="bi bi-pencil-square"></i></a>
-                    <a href="#" class="text-danger" id="delGrade" data-id="<?= $fet->g_id; ?>"><i class="bi bi-trash"></i></a>
+                    <a href="#" class="text-warning mx-2" data-id="<?= $fet->user_id; ?>" data-fullname="<?= $fet->fullname; ?>" data-username="<?= $fet->username; ?>" data-password="<?= $fet->password; ?>" data-dep="<?= $fet->dep_id;  ?>"  data-bs-toggle="modal" data-bs-target="#modalId" id="editDepHead"><i class="bi bi-pencil-square"></i></a>
+
+
+
+
+                    <a href="#" class="text-danger" id="delDepHead" data-id="<?= $fet->user_id; ?>"><i class="bi bi-trash"></i></a>
             </td>
           
         </tr>
-
+        <?php } ?>
     </tbody>
 </table>
     </div>
@@ -66,37 +77,53 @@
                 ></button>
             </div>
             <div class="modal-body">
-                <form action="" method="post" id="frm_createuser">
+                <form action="../api/ac_department.php?ac=add_head" method="post" id="frm_grade">
                     <div class="mb-3">
-                        <label for="fullname_user" class="form-label">ข้อมูลผู้ดูเเล</label>
+                        <label for="fullname" class="form-label">ข้อมูลผู้ดูเเล</label>
                         <input
                             type="text"
                             class="form-control"
-                            name="fullname_user"
-                            id="fullname_user"
+                            name="fullname"
+                            id="fullname"
                             aria-describedby="helpId"
                             placeholder="กรุณากรอกชื่อ-นามสกุล"
                             required
                         />
                     </div>
                     <div class="mb-3">
-                        <label for="pass_user" class="form-label">สร้างรหัสผ่าน</label>
+                        <label for="username" class="form-label">Username</label>
                         <input
                             type="text"
                             class="form-control"
-                            name="pass_user"
-                            id="pass_user"
+                            name="username"
+                            id="username"
+                            aria-describedby="helpId"
+                            placeholder="กรุณากรอกชื่อผู้ใช้สำหรับใช้เข้าสู่ระบบ"
+                            required
+                        />
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">สร้างรหัสผ่าน</label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            name="password"
+                            id="password"
                             aria-describedby="helpId"
                             placeholder="กรุณาสร้างรหัสผ่าน"
                             required
                         />
                     </div>
                     <div class="mb-3">
-                        <label for="grade" class="form-label">แผนก</label>
-                        <select name="quota" id="quota" class="form-select" required>
+                        <label for="dep_id" class="form-label">แผนก</label>
+                        <select name="dep_id" id="dep_id" class="form-select" required>
                             <option value="" hidden selected disabled>เลือกแผนก</option>
-                            <option value="1">เทคโนโลยีสารสนเทศ</option>
-                            <option value="0">ไฟฟ้ากำลัง</option>
+                            <?php 
+                                $sql_dep = db()->query("SELECT * FROM tb_department GROUP BY department");
+                                while ($fet_dep = $sql_dep->fetch_object()) {
+                            ?>
+                            <option value="<?= $fet_dep->dep_id; ?>"><?= $fet_dep->department; ?></option>
+                            <?php } ?>
                         </select>
                     </div>
                     

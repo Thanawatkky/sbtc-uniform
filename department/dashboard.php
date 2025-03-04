@@ -43,7 +43,7 @@
 ?>
     <div class="container mt-3">
     <h1 class="text-center mb-3">สรุปข้อมูล</h1>
-    <form action="index.php?p=reportProduct" method="post">
+    <form action="index.php" method="post">
         <div class="row g-3">
             <div class="col-md-3">
                 <label for="grade" class="form-label">ระดับชั้น</label>
@@ -62,15 +62,18 @@
                 <label for="room" class="form-label">ห้องเรียน</label>
                 <select class="form-select" id="room" name="room">
                     <option value="">ทั้งหมด</option>
-                    
+                
                 </select>
             </div>
             <div class="col-md-3">
-                <label for="project" class="form-label">โครงการ</label>
+                <label for="project" class="form-label">สิทธิ์</label>
                 <select class="form-select" id="quota" name="quota">
                     <option value="">ทั้งหมด</option>
-                    <option value="0">ปกติ</option>
-                    <option value="1">โควต้าเรียนฟรี</option>
+                    <?php 
+                        for($i=0;$i<=1;$i++) {
+                    ?>
+                    <option value="<?= $i; ?>"><?= getProject($i); ?></option>
+                    <?php } ?> 
                 </select>
             </div>
         </div>
@@ -128,13 +131,9 @@
                                             </p>
                                             <!-- ข้อมูล 2 -->
                                             <p class="card-text" style="font-family: 'Mitr', sans-serif; width: 50%; padding-right: 10px;">
-                                                <i class="bi bi-building" style="color: rgb(95, 122, 171);"></i> แผนการศึกษา: <?= $department_name; ?>
+                                                <i class="bi bi-calendar" style="color: rgb(95, 122, 171);"></i> รอบการสั่งจอง:<?= $order_round_name; ?>    
                                                 <br>
                                                 <i class="bi bi-clipboard-check" style="color: rgb(95, 122, 171);"></i> โครงการ: <?= $quota == "1" ? "เรียนฟรี" : ($quota == "0" ? "ปกติ" : "ทั้งหมด") ?>
-                                            </p>
-                                            <!-- ข้อมูล 3 -->
-                                            <p class="card-text" style="font-family: 'Mitr', sans-serif; width: 100%;">
-                                                <i class="bi bi-calendar" style="color: rgb(95, 122, 171);"></i> รอบการสั่งจอง:<?= $order_round_name; ?>
                                             </p>
                                         </div>
                                     </div>
@@ -173,7 +172,7 @@
             
 
             
-            $whereConditions = [];
+            $whereConditions = ["tb_user.dep_id = '".$fet_profile->dep_id."' "];
 
                 if (isset($grade) && $grade !== '') {
                     $whereConditions[] = "tb_user.g_id='" . $grade . "'";
@@ -221,18 +220,17 @@
                         if($fet->order_status == 1) {
                             echo "ตรวจข้อมูลถูกต้อง";
                         }else if($fet->order_status == 4) {
-                            echo " คำร้องขอเเก้ไข";
-
+                            echo "คำร้องขอแก้ไข";
                         }else if($fet->order_status == 5) {
-                            echo " กำลังดำเนินการเเก้ไข";
-
+                            echo "กำลังดำเนินการเเก้ไข";
                         }else if($fet->order_status == 0 || $fet->order_status == 6){
+                            echo "รอการตรวจสอบ";
+                        }else{ 
+                            echo "ข้อมูลไม่ถูกต้อง";
+                        }
                     ?>
-                    <button class="btn btn-secondary" data-bs-toggle="modal" id="btn-recheck" data-id="<?= $fet->order_id; ?>" data-status="<?= $fet->order_status; ?>" data-date="<?= date("d-m-Y",strtotime($fet->order_date)); ?>" data-bs-target="#check_data">
-                        <i class="fas fa-info-circle"></i> ตรวจสอบข้อมูล
-                    </button>
-                    <?php }?>
-
+                            
+                    
             </td>
         </tr>
         <?php } ?>

@@ -19,6 +19,14 @@
                     echo '<option value="'.$i.'">ห้อง '.$i.'</option>';
                 }
                 break;
+            case 'roomHead':
+                $sql = db()->query("SELECT * FROM tb_department WHERE g_id='".$_REQUEST['g_id']."' AND department='".$_REQUEST['department']."' ");
+                $fet = $sql->fetch_object();
+                echo '<option value="">ทั้งหมด</option>';
+                for ($i=1; $i <= $fet->room_qty; $i++) { 
+                    echo '<option value="'.$i.'">ห้อง '.$i.'</option>';
+                }
+                break;
             case 'admin_department':
                 $sql = db()->query("SELECT * FROM tb_department WHERE g_id='".$_REQUEST['g_id']."' ");
                 echo '<option value="">ทั้งหมด</option>';

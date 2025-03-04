@@ -161,7 +161,13 @@
             processData: false,
             success: function(data) {
                 if(data.status) {
-                    window.location.href = "index.php";
+                    if(data.role === 1) {
+                        window.location.href = "index.php";
+                    }else if(data.role === 3) {
+                        window.location.href = "../department/index.php";
+                    }else{
+                        alertMsg("Unauthorized", "error");
+                    }
                 } else {
                     alertMsg(data.msg, data.type);
                     setTimeout(() => {

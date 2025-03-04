@@ -79,7 +79,7 @@
                 </select>
             </div>
             <div class="col-md-3">
-                <label for="project" class="form-label">ประเภท</label>
+                <label for="project" class="form-label">สิทธิ์</label>
                 <select class="form-select" id="quota" name="quota">
                     <option value="">ทั้งหมด</option>
                     <?php 
@@ -254,7 +254,11 @@
                     <button class="btn btn-secondary" data-bs-toggle="modal" id="btn-recheck" data-id="<?= $fet->order_id; ?>" data-status="<?= $fet->order_status; ?>" data-date="<?= date("d-m-Y",strtotime($fet->order_date)); ?>" data-bs-target="#check_data">
                         <i class="fas fa-info-circle"></i> ตรวจสอบข้อมูล
                     </button>
-                    <?php }?>
+                    <?php 
+                }else{ 
+                    echo "ข้อมูลไม่ถูกต้อง";
+                } 
+                ?>
 
             </td>
         </tr>

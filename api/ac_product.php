@@ -16,7 +16,8 @@
                         "pro_name" => $_REQUEST['pro_name'],
                         "pro_price" => $_REQUEST['pro_price'],
                         "pro_img" => $_FILES['pro_img']['name'],
-                        "pro_type" => $_REQUEST['pro_type']
+                        "pro_type" => $_REQUEST['pro_type'],
+                        "sex" => $_REQUEST['sex']
                     ];
                     if(insert("tb_product", $data)) {
                         echo jsonMsg(true, "เพิ่มข้อมูลสำเร็จ","success");
@@ -41,7 +42,8 @@
                     "pro_name" => $_REQUEST['pro_name'],
                     "pro_price" => $_REQUEST['pro_price'],
                     "pro_img" => $file,
-                    "pro_type" => $_REQUEST['pro_type']
+                    "pro_type" => $_REQUEST['pro_type'],
+                    "sex" => $_REQUEST['sex']
 
                 ];
                 $id = [

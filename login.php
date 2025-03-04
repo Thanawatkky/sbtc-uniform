@@ -114,7 +114,7 @@
             <div class="text-center">
             <p class="text-center mt-3" style="font-family: 'Mitr', sans-serif;">ยังไม่มีบัญชีใช่ไหม? <a href="register.php">สมัครสมาชิก</a></p>
             <p class="text-muted">-or-</p>
-            <a href="admin/login.php" class="text-decoration-none"  style="font-family: 'Mitr', sans-serif;">Admin Login</a>
+            <a href="admin/login.php" class="text-decoration-none"  style="font-family: 'Mitr', sans-serif;">Admin or Department Login</a>
             </div>
         </form>
     </div>

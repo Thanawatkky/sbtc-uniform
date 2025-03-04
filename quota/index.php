@@ -137,6 +137,49 @@
   </div>
 </div>
 </div>
+
+<div
+    class="modal fade"
+    id="modalviewSize"
+    tabindex="-1"
+    data-bs-backdrop="static"
+    data-bs-keyboard="false"
+    
+    role="dialog"
+    aria-labelledby="modalTitleId"
+    aria-hidden="true"
+>   
+    <div
+        class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-md"
+        role="document"
+    >
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalTitleId">
+                    ข้อมูลไซส์เครื่องแบบ
+                </h5>
+                <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                ></button>
+            </div>
+            <div class="modal-body">
+                <div class="text-start">
+                    <h5 id="nameproduct"></h5>
+                </div>
+                    
+                        <img  alt="sizeimg" class="img-thumbnail d-block mx-auto" id="imgproduct" width="450" height="450">
+        
+                </div>
+                
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">ปิด</button>
+            </div>
+        </div>
+    </div>
+</div>
         <!-- Footer-->
         <footer class="py-5 bg-light border-top">
             <div class="container"><p class="m-0 text-center text-dark">Copyright &copy; Your Website 2023</p></div>
@@ -200,32 +243,46 @@
                         return selectedOption.value;
                     }
                     }).then((result) => {
-                    if (result.isConfirmed) {
-                        $.ajax({
-                        url: "../api/ac_quota_uniform.php?ac=addToCart&sex="+result.value,
-                        method: "POST",
-                        
-                        success: function (response) {
-                            console.log(response);
-                            localStorage.setItem("ajaxSent", "true"); // บันทึกค่าเพื่อไม่ให้ส่งซ้ำ
-                            window.location.reload(true);
-                        },
-                        error: function (xhr, status, error) {
-                            console.error("Error sending data", error);
+                        if (result.isConfirmed) {
+                            $.ajax({
+                                url: "../api/ac_quota_uniform.php?ac=addToCart&sex="+result.value,
+                                method: "POST",
+                                
+                                success: function (response) {
+                                    console.log(response);
+                                    
+                                    localStorage.setItem("ajaxSent", "true"); // บันทึกค่าเพื่อไม่ให้ส่งซ้ำ
+                                    window.location.reload(true);
+                                },
+                                error: function (xhr, status, error) {
+                                    console.error("Error sending data", error);
+                                }
+                            });
                         }
                     });
-                    }
-                    });
-
-                    
-
-                    
-                   
-            }
-
-            // localStorage.removeItem("ajaxSent");
-
+                }
             })
+
+            $(document).on("click","#sex",function() {
+                $.ajax({
+                    url: "../api/ac_quota_uniform.php?ac=changeSex&sex="+$(this).val(),
+                    method: "POST",
+                    success: function(data) {
+                        window.location.reload(true);
+                    },error: function(err) {
+                        console.log(err);
+                        
+                    }
+                })
+            });
+
+
+            $(document).on("click","#btn-viewSize",function() {
+                let img = $(this).data("img");
+                let name = $(this).data("name");
+                $("#imgproduct").attr("src","../img/size/"+img);
+                $("#nameproduct").text(name);
+            });
             $(document).on("change","#grade",function() {
 
 
@@ -312,7 +369,7 @@
 
                 return false; // ป้องกันการ submit แบบปกติ
             })
-            $(document).on("click","#btn-logout",() => {
+            $(document).on("click","#btn-logout",function(){
                 Swal.fire({
                 text: "คุณต้องการจะออกจากระบบใช่ไหม?",
                 icon: "warning",

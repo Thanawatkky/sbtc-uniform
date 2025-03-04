@@ -114,6 +114,19 @@
                     }
                     
                     break;
+                case 'cancel':
+                    $data = [
+                        "order_status" => 9
+                    ];
+                    $id = [
+                        "order_id" => $_REQUEST['order_id']
+                    ];
+                    if(update("tb_order",$data,$id)) {
+                        echo jsonMsg(true, "แจ้งข้อมูลผิดพลาดสำเร็จ","success");
+                    }else{
+                        echo db()->error;
+                    }
+                    break;
         }
     }
 ?>

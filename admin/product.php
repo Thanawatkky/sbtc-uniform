@@ -16,6 +16,7 @@
             <th>เครื่องแบบ</th>
             <th>ราคา</th>
             <th>หมวดหมู่</th>
+            <th>เพศ</th>
             <th>Action</th>
         </tr>
     </thead>
@@ -35,9 +36,10 @@
 
             <td>฿<?= $fet->pro_price; ?></td>
             <td><?= productType($fet->pro_type); ?></td>
+            <td><?= getSex($fet->sex); ?></td>
             <td>
             <a href="#" class="text-primary"  data-id="<?= $fet->pro_id; ?>" data-name="<?= $fet->pro_name; ?>" data-price="<?= $fet->pro_price; ?>" data-img="<?= $fet->pro_img; ?>" data-type="<?= productType($fet->pro_type); ?>" data-bs-toggle="modal" data-bs-target="#modalviewPd" id="btn-viewPd"><i class="fas fa-eye"></i></a>
-            <a href="#" class="text-warning mx-2" data-id="<?= $fet->pro_id; ?>" data-name="<?= $fet->pro_name; ?>" data-price="<?= $fet->pro_price; ?>" data-type="<?= $fet->pro_type; ?>" data-bs-toggle="modal" data-bs-target="#modal-editpd" id="btn-editpd"><i class="bi bi-pencil-square"></i></a>
+            <a href="#" class="text-warning mx-2" data-id="<?= $fet->pro_id; ?>" data-name="<?= $fet->pro_name; ?>" data-price="<?= $fet->pro_price; ?>" data-type="<?= $fet->pro_type; ?>" data-sex="<?= $fet->sex; ?>" data-bs-toggle="modal" data-bs-target="#modal-editpd" id="btn-editpd"><i class="bi bi-pencil-square"></i></a>
             <a href="#" class="text-danger" id="btn-delpd" data-id="<?= $fet->pro_id; ?>"><i class="bi bi-trash"></i></a>
                 
                 
@@ -75,9 +77,21 @@
             <div class="mb-3">
                 <label for="pro_type">หมวดหมู่</label>
                 <select name="pro_type" id="pro_type" class="form-select" required>
-                    <option value="" selected hidden disabled>เลือกหมวดหมู่เสำหรับเครื่องแบบ</option>
+                    <option value="" selected hidden disabled>เลือกหมวดหมู่สำหรับเครื่องแบบ</option>
                     <?php 
                         $type = ["1" => "เสื้อนักเรียน-เสื้อฝึกงาน", "2" => "กางเกง-รองเท้า", "3" => "อุปกรณ์เสริมอื่นๆ"];
+                        foreach ($type as $key => $value) {
+                    ?>
+                            <option value="<?= $key; ?>"><?= $value; ?></option>
+                    <?php } ?>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="sex">เพศ</label>
+                <select name="sex" id="sex" class="form-select" required>
+                    <option value="" selected hidden disabled>เลือกเพศสำหรับเครื่องแบบ</option>
+                    <?php 
+                        $type = ["1" => "ชาย", "2" => "หญิง", "0" => "ทั้งหมด"];
                         foreach ($type as $key => $value) {
                     ?>
                             <option value="<?= $key; ?>"><?= $value; ?></option>
@@ -120,9 +134,21 @@
             <div class="mb-3">
                 <label for="pro_type">หมวดหมู่</label>
                 <select name="pro_type" id="pro_type1" class="form-select" required>
-                    <option value="" selected hidden disabled>เลือกหมวดหมู่เสำหรับเครื่องแบบ</option>
+                    <option value="" selected hidden disabled>เลือกหมวดหมู่สำหรับเครื่องแบบ</option>
                     <?php 
                         $type = ["1" => "เสื้อนักเรียน-เสื้อฝึกงาน", "2" => "กางเกง-รองเท้า", "3" => "อุปกรณ์เสริมอื่นๆ"];
+                        foreach ($type as $key => $value) {
+                    ?>
+                            <option value="<?= $key; ?>"><?= $value; ?></option>
+                    <?php } ?>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="sex">เพศ</label>
+                <select name="sex" id="sex1" class="form-select" required>
+                    <option value="" selected hidden disabled>เพศสำหรับเครื่องแบบ</option>
+                    <?php 
+                        $type = ["1" => "ชาย", "2" => "หญิง", "0" => "ทั้งหมด"];
                         foreach ($type as $key => $value) {
                     ?>
                             <option value="<?= $key; ?>"><?= $value; ?></option>

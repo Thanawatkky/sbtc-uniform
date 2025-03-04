@@ -18,13 +18,19 @@
                 }
                 break;
                 case 'admin':
-                    $sql = db()->query("SELECT * FROM tb_user WHERE username='".$_REQUEST['username']."' AND password='".$_REQUEST['password']."'AND user_role = 1");
+                    $sql = db()->query("SELECT * FROM tb_user WHERE username='".$_REQUEST['username']."' AND password='".$_REQUEST['password']."'");
                     if($sql->num_rows <= 0) {
                         echo jsonMsg(false, "ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง","error");
                     }else{
                         $fet = $sql->fetch_object();
                         $_SESSION['user_id'] = $fet->user_id;
-                        echo jsonMsg(true,false, false);
+                        if($fet->user_role == 1) {
+                            echo json_encode(["status" => true, "role" => 1]);
+                        }else if($fet->user_role == 3) {
+                            echo json_encode(["status" => true, "role" => 3]);
+                        }else{
+                            echo http_response_code(401, "Unauthorized");
+                        }
                     }
                     break;
         }

@@ -97,6 +97,9 @@
                 <button id="btn-complete" type="button" class="btn btn-success">
                     <i class="fas fa-check-circle"></i> ยืนยันข้อมูลถูกต้อง
                 </button>
+                <button id="btn-cancel" type="button" class="btn btn-danger">
+                    <i class="fas fa-times"></i> ข้อมูลไม่ถูกต้อง
+                </button>
             </div>
         </div>
     </div>
@@ -165,6 +168,41 @@
                     }
                 });
             })
+            $(document).on("click","#btn-cancel",function() {
+                let id = $(this).data("id");
+                Swal.fire({
+                text: "คุณต้องการแจ้งข้อมูลผิดพลาดหรือไม่?",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "ใช่",
+                cancelButtonText: "ไม่ใช่"
+                }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: "../api/ac_order.php?ac=cancel&order_id="+id,
+                        dataType: "json",
+                        method: "delete",
+                        processData: false,
+                        contentType: false,
+                        success: (data) => {
+                            if(data.status) {
+                                alertMsg(data.msg, data.type);
+                                setTimeout(() => {
+                                    window.location.reload(true);
+                                },2000);
+                            }else{
+                                console.log(data);
+                            }
+                        },error: (err) => {
+                            console.log(err);
+                            
+                        }
+                    })
+                }
+                });
+            })
         $(document).on("submit","#frm_grade",function() {
             
                 let url = $(this).attr("action");
@@ -220,6 +258,7 @@
             $("#pro_name1").val($(this).data("name"));
             $("#pro_price1").val($(this).data("price"))
             $("#pro_type1").val($(this).data("type"))
+            $("#sex1").val($(this).data("sex"))
         })
         $(document).on("click","#btn-sizeEdit",function() {
             $("#size_id").val($(this).data('id'));
@@ -233,6 +272,13 @@
             $("#g_id1").val($(this).data("grade"));
             $("#room_qty1").val($(this).data("room"));
             $("#department1").val($(this).data("dep"));
+        });
+        $(document).on("click","#editDepHead",function() {
+            $("#username").val($(this).data("username"));
+            $("#password").val($(this).data("password"));
+            $("#fullname").val($(this).data("fullname"));
+            $("#dep_id").val($(this).data("dep"));
+            $("#frm_grade").attr("action","../api/ac_department.php?ac=edit_head&user_id="+$(this).data("id"));
         });
         $(document).on("click","#delGrade",function() {
             let id = $(this).data("id");
@@ -284,6 +330,42 @@
             if (result.isConfirmed) {
                 $.ajax({
                     url: "../api/ac_department.php?ac=del&dep_id="+id,
+                    dataType: "json",
+                    method: "delete",
+                    processData: false,
+                    contentType: false,
+                    success: (data) => {
+                        if(data.status) {
+                            alertMsg(data.msg, data.type);
+                            setTimeout(() => {
+                                window.location.reload(true);
+                            },2000);
+                        }else{
+                            console.log(data);
+                        }
+                    },error: (err) => {
+                        console.log(err);
+                        
+                    }
+                })
+            }
+            });
+                        
+        });
+        $(document).on("click","#delDepHead",function() {
+            let id = $(this).data("id");
+            Swal.fire({
+            text: "คุณต้องการลบข้อมูลดังกล่าวใช่ไหม?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "ใช่",
+            cancelButtonText: "ไม่ใช่"
+            }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: "../api/ac_department.php?ac=del_head&user_id="+id,
                     dataType: "json",
                     method: "delete",
                     processData: false,
@@ -547,6 +629,7 @@ $(document).on("click","#btn-endPre",function() {
                             $("#table-report").html(data);
                             
                             $("#btn-complete").attr("data-id",id);
+                            $("#btn-cancel").attr("data-id",id);
                             
 
                             

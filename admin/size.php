@@ -21,7 +21,7 @@
     </thead>
     <tbody>
         <?php 
-            $sql = db()->query("SELECT * FROM tb_size ");
+            $sql = db()->query("SELECT tb_size.*,tb_product.pro_name FROM tb_size LEFT JOIN tb_product ON tb_size.size_product = tb_product.pro_id");
             $i=0;
             while($fet = $sql->fetch_object()) {
                 $i++;
@@ -30,7 +30,7 @@
             <td><?= $i; ?></td>
             <td>
                 <img src="../img/size/<?= $fet->size_img; ?>" alt="proImg" width="50px" height="50px" class="img-thumbnail me-2">
-                <?= $fet->size_product; ?>
+                <?= $fet->pro_name; ?>
             </td>
 
             <td><?= $fet->sex == 1 ? "ชาย" : "หญิง"; ?></td>
@@ -62,9 +62,17 @@
       </div>
       <div class="modal-body">
         <form action="../api/ac_size.php?ac=add" method="post" enctype="multipart/form-data" id="frm_grade">
-            <div class="mb-3">
-                <label for="size_product" class="form-label">กรอกเครื่องแบบ</label>
-                <input type="text" class="form-control" id="size_product" name="size_product" placeholder="กรอกเครื่องแบบสำหรับกำหนดไซส์"  required>
+        <div class="mb-3">
+            <label for="size_product" class="form-label">เครื่องแบบ</label>
+              <select name="size_product" id="size_product" class="form-select">
+                <option value="" selected disabled hidden>เลือกเครื่องเเบบ</option>
+                <?php 
+                  $sql_product = db()->query("SELECT * FROM tb_product");
+                  while($fet_product = $sql_product->fetch_object()) {
+                ?>
+                <option value="<?= $fet_product->pro_id; ?>"><?= $fet_product->pro_name; ?></option>
+                <?php } ?>
+              </select>
             </div>
             <div class="mb-3">
             <label for="size_product" class="form-label">เพศ</label>

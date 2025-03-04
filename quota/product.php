@@ -7,6 +7,7 @@
                         while($fet = $sql->fetch_object()) {
                     ?>
                     <div class="col-sm-12 col-lg-6 mb-5">
+                 
                         <div class="card h-100">
                             <!-- Product image-->
                             <img class="card-img-top" src="../img/product/<?= $fet->pro_img; ?>" width="450" height="250" alt="..." />
@@ -21,7 +22,20 @@
                             </div>
                             <!-- Product actions-->
                             <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><button class="btn btn-outline-dark mt-auto" type="button" id="btn-cart" data-id="<?= $fet->pro_id; ?>">หยิบใส่ตะกร้า</button></div>
+                                <?php 
+                                                $sql_size = db()->query("SELECT * FROM tb_size WHERE size_product = '".$fet->pro_id."'");
+                                                if($sql_size->num_rows > 0) {
+                                                    $fet_size = $sql_size->fetch_object();
+                                            ?>
+                                            <div class="text-center mb-3">
+                                            <button class="btn btn-sm btn-primary" id="btn-viewSize" data-bs-toggle="modal" data-bs-target="#modalviewSize" data-img="<?= $fet_size->size_img; ?>" data-name="<?= $fet->pro_name; ?>">
+                                               ดูขนาดไซส์
+                                            </button>
+                                            </div>
+                                            <?php } ?>
+                                <div class="text-center">
+                                    <button class="btn btn-outline-dark mt-auto" type="button" id="btn-cart" data-id="<?= $fet->pro_id; ?>">หยิบใส่ตะกร้า</button>
+                                </div>
                             </div>
                         </div>
                     </div>

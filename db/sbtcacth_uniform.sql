@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 24, 2025 at 03:34 AM
+-- Generation Time: Feb 25, 2025 at 08:52 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -66,7 +66,10 @@ INSERT INTO `tb_cart` (`ca_id`, `ca_product`, `ca_user`, `ca_qty`, `ca_size`, `o
 (79, 11, 61, 1, NULL, 42),
 (80, 12, 61, 1, NULL, 42),
 (81, 9, 63, 2, 'XL', 43),
-(82, 10, 63, 1, '30', 43);
+(82, 10, 63, 1, '30', 43),
+(83, 9, 55, 1, 'L', 44),
+(84, 10, 55, 1, '40', 44),
+(85, 9, 69, 1, 'XL', 45);
 
 -- --------------------------------------------------------
 
@@ -104,7 +107,25 @@ INSERT INTO `tb_cart_quota` (`cq_id`, `cq_user`, `cq_product`, `cq_qty`, `cq_siz
 (79, 63, 11, 1, '', 43),
 (80, 63, 12, 1, '', 43),
 (81, 63, 18, 1, 'XL', 43),
-(82, 63, 9, 1, 'XL', 43);
+(82, 63, 9, 1, 'XL', 43),
+(83, 64, 10, 1, '', 0),
+(84, 64, 11, 1, '', 0),
+(85, 64, 12, 1, '', 0),
+(86, 64, 18, 1, '', 0),
+(87, 64, 9, 1, '', 0),
+(88, 64, 13, 1, '', 0),
+(89, 65, 10, 1, '', 0),
+(90, 65, 11, 1, '', 0),
+(91, 65, 12, 1, '', 0),
+(92, 65, 18, 1, '', 0),
+(93, 65, 9, 1, '', 0),
+(94, 65, 13, 1, '', 0),
+(131, 69, 10, 1, '43', 45),
+(132, 69, 11, 1, '', 45),
+(133, 69, 12, 1, '', 45),
+(134, 69, 18, 1, 'M', 45),
+(135, 69, 9, 1, 'M', 45),
+(136, 69, 13, 1, '43', 45);
 
 -- --------------------------------------------------------
 
@@ -181,8 +202,10 @@ INSERT INTO `tb_order` (`order_id`, `cus_name`, `total_price`, `order_status`, `
 (39, 58, 1490, 1, '2025-02-21 03:14:35'),
 (40, 59, 1270, 1, '2025-02-21 03:15:58'),
 (41, 60, 950, 1, '2025-02-21 04:27:57'),
-(42, 61, 330, 0, '2025-02-21 06:47:18'),
-(43, 63, 920, 1, '2025-02-23 07:11:57');
+(42, 61, 330, 1, '2025-02-21 06:47:18'),
+(43, 63, 920, 1, '2025-02-23 07:11:57'),
+(44, 55, 620, 1, '2025-02-25 15:45:31'),
+(45, 69, 300, 0, '2025-02-25 19:37:01');
 
 -- --------------------------------------------------------
 
@@ -216,23 +239,24 @@ CREATE TABLE `tb_product` (
   `pro_name` varchar(255) NOT NULL,
   `pro_price` int(11) NOT NULL,
   `pro_type` int(11) NOT NULL,
-  `pro_img` varchar(255) NOT NULL
+  `pro_img` varchar(255) NOT NULL,
+  `sex` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `tb_product`
 --
 
-INSERT INTO `tb_product` (`pro_id`, `pro_name`, `pro_price`, `pro_type`, `pro_img`) VALUES
-(9, 'เสื้อฝึกงาน', 300, 1, 'shop_ex1.png'),
-(10, 'กางเกงผ้าเสิท', 320, 2, 'ex_3_student.jpg'),
-(11, 'หัวเข็มขัด+สาย', 110, 3, 'th-11134207-7r98z-lnzlwqv1kx9jc4-removebg-preview (1).png'),
-(12, 'เข็มกลัดอก ', 40, 3, 'K_911.png'),
-(13, 'รองเท้าผ้าใบสีดำ', 320, 2, 'shose_student.jpg'),
-(16, 'เสื้อขาวเเขนยาว', 220, 1, 'S0e71ac1bfeef4821ac2f1e61b3ac0ca2W.jpg_720x720q80.jpg'),
-(17, 'ไทด์', 180, 3, 'nacktai.png'),
-(18, 'เสื้อขาวเเขนสั้นชาย', 180, 1, 'original-1656506764621.jpg'),
-(19, 'เสื้อขาวเเขนสั้นหญิง', 180, 1, 'ex_student.jpg');
+INSERT INTO `tb_product` (`pro_id`, `pro_name`, `pro_price`, `pro_type`, `pro_img`, `sex`) VALUES
+(9, 'เสื้อฝึกงาน', 300, 1, 'shop_ex1.png', 1),
+(10, 'กางเกงผ้าเสิท', 320, 2, 'ex_3_student.jpg', 0),
+(11, 'หัวเข็มขัด+สาย', 110, 3, 'th-11134207-7r98z-lnzlwqv1kx9jc4-removebg-preview (1).png', 0),
+(12, 'เข็มกลัดอก ', 40, 3, 'K_911.png', 0),
+(13, 'รองเท้าผ้าใบสีดำ', 320, 2, 'shose_student.jpg', 0),
+(16, 'เสื้อขาวเเขนยาว', 220, 1, 'S0e71ac1bfeef4821ac2f1e61b3ac0ca2W.jpg_720x720q80.jpg', 0),
+(17, 'ไทด์', 180, 3, 'nacktai.png', 0),
+(18, 'เสื้อขาวเเขนสั้นชาย', 180, 1, 'original-1656506764621.jpg', 1),
+(19, 'เสื้อขาวเเขนสั้นหญิง', 180, 1, 'ex_student.jpg', 2);
 
 -- --------------------------------------------------------
 
@@ -243,7 +267,7 @@ INSERT INTO `tb_product` (`pro_id`, `pro_name`, `pro_price`, `pro_type`, `pro_im
 CREATE TABLE `tb_size` (
   `size_id` int(11) NOT NULL,
   `size_img` varchar(255) NOT NULL,
-  `size_product` varchar(255) NOT NULL,
+  `size_product` int(11) NOT NULL,
   `sex` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
@@ -252,8 +276,9 @@ CREATE TABLE `tb_size` (
 --
 
 INSERT INTO `tb_size` (`size_id`, `size_img`, `size_product`, `sex`) VALUES
-(1, '20250207012454.jpg', 'เสื้อฝึกงานชาย', 1),
-(3, '20250207021127.jpg', 'เสื้อนักเรียนหญิง', 2);
+(1, '20250207012454.jpg', 9, 1),
+(3, '20250207021127.jpg', 19, 2),
+(4, '20250225080920.jpg', 18, 1);
 
 -- --------------------------------------------------------
 
@@ -320,7 +345,36 @@ INSERT INTO `tb_user` (`user_id`, `fullname`, `citizen_id`, `tel`, `g_id`, `dep_
 (60, 'ทิวาพร อินอิ่ม', '1189900459331', '0947789954', 4, 4, 1, 2, NULL, NULL, 0),
 (61, 'นาฎนารี เอื้อเฟื้อพันธุ์', '1119900459331', '0854421145', 4, 4, 1, 2, NULL, NULL, 0),
 (62, 'เกียรติศักดิ์ เรียบร้อย', '1109900459331', '0865541123', 5, 3, 1, 2, NULL, NULL, 1),
-(63, 'กิตติทัต เชาว์เเปดริ้ว', '1219900459331', '0925195842', 5, 8, 1, 2, NULL, NULL, 1);
+(63, 'กิตติทัต เชาว์เเปดริ้ว', '1219900459331', '0925195842', 5, 8, 1, 2, NULL, NULL, 1),
+(64, 'Thanawat Chueanongprong', '1717800033378', '0889993389', 5, 3, 1, 2, NULL, NULL, 1),
+(65, 'ทดสอบเรียนดี', '559990049331', '0925195545', 5, 3, 1, 2, NULL, NULL, 1),
+(66, 'สมหวย', '', '', 0, 3, 0, 3, 'it@1', '2409', 0),
+(68, 'test', '', '', 0, 12, 0, 3, 'test', '1234', 0),
+(69, 'สมหวย มวยขันทรี', '1234567890123', '0889993389', 5, 3, 1, 2, NULL, NULL, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `view_price_quota`
+-- (See below for the actual view)
+--
+CREATE TABLE `view_price_quota` (
+`u_id` int(11)
+,`u_qty` int(11)
+,`pro_price` int(11)
+,`pro_name` varchar(255)
+,`sex` int(11)
+,`pro_id` int(11)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `view_price_quota`
+--
+DROP TABLE IF EXISTS `view_price_quota`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `view_price_quota`  AS SELECT `tb_uquota`.`u_id` AS `u_id`, `tb_uquota`.`u_qty` AS `u_qty`, `tb_product`.`pro_price` AS `pro_price`, `tb_product`.`pro_name` AS `pro_name`, `tb_uquota`.`sex` AS `sex`, `tb_uquota`.`pro_id` AS `pro_id` FROM (`tb_uquota` left join `tb_product` on(`tb_uquota`.`pro_id` = `tb_product`.`pro_id`)) GROUP BY `tb_uquota`.`pro_id` ;
 
 --
 -- Indexes for dumped tables
@@ -394,13 +448,13 @@ ALTER TABLE `tb_user`
 -- AUTO_INCREMENT for table `tb_cart`
 --
 ALTER TABLE `tb_cart`
-  MODIFY `ca_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=83;
+  MODIFY `ca_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=86;
 
 --
 -- AUTO_INCREMENT for table `tb_cart_quota`
 --
 ALTER TABLE `tb_cart_quota`
-  MODIFY `cq_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=83;
+  MODIFY `cq_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=137;
 
 --
 -- AUTO_INCREMENT for table `tb_department`
@@ -418,7 +472,7 @@ ALTER TABLE `tb_grade`
 -- AUTO_INCREMENT for table `tb_order`
 --
 ALTER TABLE `tb_order`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
 -- AUTO_INCREMENT for table `tb_preorder`
@@ -436,7 +490,7 @@ ALTER TABLE `tb_product`
 -- AUTO_INCREMENT for table `tb_size`
 --
 ALTER TABLE `tb_size`
-  MODIFY `size_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `size_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `tb_uquota`
@@ -448,7 +502,7 @@ ALTER TABLE `tb_uquota`
 -- AUTO_INCREMENT for table `tb_user`
 --
 ALTER TABLE `tb_user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

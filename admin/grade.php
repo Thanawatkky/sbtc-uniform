@@ -11,7 +11,7 @@
         <tr>
             <th>#</th>
             <th>ระดับชั้น</th>
-            <th>โครงการ</th>
+            <th>สิทธิ์</th>
             <th >Action</th>
         </tr>
     </thead>
@@ -85,10 +85,13 @@
                     </div>
                     <div class="mb-3">
                         <label for="grade" class="form-label">ประเภท</label>
-                        <select name="quota" id="quota" class="form-select" required>
-                            <option value="" hidden selected disabled>เลือกประเภท</option>
-                            <option value="1">สิทธิ์เรียนฟรี 15 ปี (950 บาท)</option>
-                            <option value="0">ไม่ได้รับสิทธิ์เรียนฟรี</option>
+                        <select class="form-select" id="quota" name="quota">
+                            <option value="">ทั้งหมด</option>
+                            <?php 
+                                for($i=0;$i<=1;$i++) {
+                            ?>
+                            <option value="<?= $i; ?>"><?= getProject($i); ?></option>
+                            <?php } ?> 
                         </select>
                     </div>
                     

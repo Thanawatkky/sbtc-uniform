@@ -71,7 +71,7 @@
                 </select>
             </div>
                 <div class="col-md-3">
-                    <label for="quota" class="form-label">โครงการ</label>
+                    <label for="quota" class="form-label">สิทธิ์</label>
                     <select class="form-select" id="quota" name="quota">
                         <option value="">ทั้งหมด</option>
                         <?php 

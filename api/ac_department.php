@@ -45,6 +45,69 @@
                     echo db()->error;
                 }
                 break;
+            case 'add_head':
+                $sql  = db()->query("SELECT * FROM tb_user WHERE username='".$_REQUEST['username']."' AND user_role = 3");
+                if($sql->num_rows <= 0) {
+                    $data = [
+                        "fullname" => $_REQUEST['fullname'],
+                        "username" => $_REQUEST['username'],
+                        "password" => $_REQUEST['password'],
+                        "user_role" => 3,
+                        "dep_id" => $_REQUEST['dep_id'],
+                    ];
+                    if(insert("tb_user", $data)) {
+                        echo jsonMsg(true, "เพิ่มข้อมูลสำเร็จ","success");
+                    }else{
+                        echo db()->error;
+                    }
+                }else{
+                    echo jsonMsg(false, "มีข้อมูลดังกล่าวในระบบแล้ว","error");
+                }
+                break;
+            case 'edit_head':
+                $data = [
+                    "fullname" => $_REQUEST['fullname'],
+                    "username" => $_REQUEST['username'],
+                    "password" => $_REQUEST['password'],
+                    "dep_id" => $_REQUEST['dep_id']
+                ];
+                $id = [
+                    "user_id" => $_REQUEST['user_id']
+                ];
+                if(update("tb_user", $data, $id)) {
+                    echo jsonMsg(true, "แก้ไขข้อมูลสำเร็จ","success");
+                }else{
+                    echo db()->error;
+                }
+
+                break;
+            case 'del_head':
+                $id = [
+                    "user_id" => $_REQUEST['user_id']
+                ];
+                if(delete("tb_user", $id)) {
+                    echo jsonMsg(true, "ลบข้อมูลสำเร็จ","success");
+                }else{
+                    echo db()->error;
+                }
+                break;
+
+            case 'edit_profile':
+                $data = [
+                    "fullname" => $_REQUEST['fullname'],
+                    "password" => $_REQUEST['password'],
+                ];
+                $id = [
+                    "user_id" => $_SESSION['user_id']
+                ];
+                if(update("tb_user", $data, $id)) {
+                    echo jsonMsg(true, "แก้ไขข้อมูลสำเร็จ","success");
+                }else{
+                    echo db()->error;
+                }
+            
+                break;
+
         }
     }
 ?>

@@ -98,7 +98,7 @@
                             <?php } ?>
                             <!-- Total -->
                             <div class="text-center py-3">
-                                <h5 style="font-family: 'Mitr', sans-serif;" class="<?= $fet_order->order_status == 0 ? 'text-warning' : 'text-success'; ?>"><?= orderStatus($fet_order->order_status); ?></h5>
+                                <h5 style="font-family: 'Mitr', sans-serif;" class="<?= $fet_order->order_status == 0 ? 'text-warning' : ($fet_order->order_status == 9  ? 'text-danger' : 'text-success'); ?>"><?= orderStatus($fet_order->order_status); ?></h5>
                                 <h3 style="font-family: 'Mitr', sans-serif;">รวมทั้งหมด <?= number_format($fet_order->total_price, 2); ?> THB.</h3>
                                 <!-- Request Edit Button -->
                                 <?php 
@@ -109,11 +109,11 @@
                             </button>
                             <?php } ?>
                             <?php 
-                                if($fet_order->order_status == 5) {
+                                if($fet_order->order_status == 5 || $fet_order->order_status == 9) {
 
                                 
                             ?>
-                            <a href="?p=update_order&order_id=<?= $fet_order->order_id; ?>" type="button" class="btn btn-outline-warning mt-3 px-4 py-2" style="font-family: 'Mitr', sans-serif; font-size: 1.2rem;">
+                            <a href="index.php?p=update_order&order_id=<?= $fet_order->order_id; ?>" type="button" data-id="<?= $fet_order->order_id; ?>" id="btn-editOrder" class="btn btn-outline-warning mt-3 px-4 py-2" style="font-family: 'Mitr', sans-serif; font-size: 1.2rem;">
                                 <i class="fas fa-edit me-2"></i> แก้ไขรายการสั่งจอง
                             </a>
                             <?php } ?>
@@ -190,7 +190,7 @@
                             <?php } ?>
                            <!-- Total -->
                            <div class="text-center py-3">
-                                <h5 style="font-family: 'Mitr', sans-serif;" class="<?= $fet_order->order_status == 0 ? 'text-warning' : 'text-success'; ?>"><?= orderStatus($fet_order->order_status); ?></h5>
+                                <h5 style="font-family: 'Mitr', sans-serif;" class="<?= $fet_order->order_status == 0 ? 'text-warning' : ($fet_order->order_status == 9  ? 'text-danger' : 'text-success'); ?>"><?= orderStatus($fet_order->order_status); ?></h5>
                                 <h3 style="font-family: 'Mitr', sans-serif;">รวมทั้งหมด <?= number_format($fet_order->total_price, 2); ?> THB.</h3>
                             <!-- Request Edit Button -->
                             <?php 
@@ -201,11 +201,11 @@
                             </button>
                             <?php } ?>
                             <?php 
-                                if($fet_order->order_status == 5) {
+                                if($fet_order->order_status == 5 || $fet_order->order_status == 9) {
 
                                 
                             ?>
-                            <a href="?p=update_order&order_id=<?= $fet_order->order_id; ?>" type="button" class="btn btn-outline-warning mt-3 px-4 py-2" style="font-family: 'Mitr', sans-serif; font-size: 1.2rem;">
+                            <a href="index.php?p=update_order&order_id=<?= $fet_order->order_id; ?>" type="button" data-id="<?= $fet_order->order_id; ?>" id="btn-editOrder" class="btn btn-outline-warning mt-3 px-4 py-2" style="font-family: 'Mitr', sans-serif; font-size: 1.2rem;">
                                 <i class="fas fa-edit me-2"></i> แก้ไขรายการสั่งจอง
                             </a>
                             <?php } ?>
