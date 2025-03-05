@@ -6,7 +6,6 @@
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
                         <li class="nav-item"><a class="nav-link active" aria-current="page" href="index.php"><i class="bi bi-house-door"></i> หน้าแรก</a></li>
                         <li class="nav-item"><a class="nav-link active" href="?p=product"><i class="bi bi-bag"></i> สินค้าทั้งหมด</a></li>
-                        <li class="nav-item"><a class="nav-link active" href="?p=size"><i class="bi bi-bounding-box-circles"></i> ตารางไซส์</a></li>
                         
                     </ul>
                     <div class="d-flex align-items-center">

@@ -2,8 +2,8 @@
 
     function db() {
 
-      $conn = new mysqli("localhost","sbtcacth_uniform","VSFUBnKYbpCUYWg4rkS2","sbtcacth_uniform");
-        //$conn = new mysqli("localhost","root","","db_uniformfinal");
+      //$conn = new mysqli("localhost","sbtcacth_uniform","VSFUBnKYbpCUYWg4rkS2","sbtcacth_uniform");
+        $conn = new mysqli("localhost","root","","db_uniformfinal");
 
         
         ini_set('display_errors', 0);
